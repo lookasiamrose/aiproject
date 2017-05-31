@@ -11,11 +11,12 @@
 <h3> Uruchamianie Aplikacji na OpenNN </h3>
 <p> Po pullowaniu repozytorium oraz włączeniu QT możemy teraz otworzyć projekt. Tradycyjnie File->Open Project-> i tutaj plik opennn.pro z głównego katalogu repozytorium </p>
 
-<p>Teraz rozwijamy sobie wszystkie główne katalogi w QT i kompilujemy podprojekty w odpowiedniej kolejności. <b>W kolejności tinyxml2 -> opennn -> examples/logical_operators -> aiproject</b> A robimy to tak że klikamy kursorem na plik *.pro w dany podprojekcie i w górnym menu Budowanie -> klikamy "Zbuduj podprojekt .nazwapodprojektu."</p>
+<p>Teraz rozwijamy sobie wszystkie główne katalogi w QT i kompilujemy podprojekty w odpowiedniej kolejności. <b>W kolejności tinyxml2 -> opennn -> examples/logical_operators -> aiproject</b> A robimy to tak że klikamy kursorem na plik *.pro w danym podprojekcie i w górnym menu Budowanie -> klikamy "Zbuduj podprojekt .nazwapodprojektu."</p>
 
-<p>Możliwe że wcześniej trzeba kliknać w menu Budowanie "uruchom qmake"!</p>
+<p>Możliwe że wcześniej (przed wszystkim) trzeba kliknąć w menu Budowanie "uruchom qmake"!</p>
 <p> I teraz możemy już jaki projekt w jakim trybie będzie budowany zieloną strzałeczką jak poniżej</p>
 
 <img src="http://i.imgur.com/nZMguw5.png?1" alt="IMG Choose Target Build" />
 
 <p>Na tą chwile są to dwa podprojekty - jeden to przykładowy, a drugi to projekt</p>
+<p>Projekt powinien teraz dać się uruchomić wspomnianą strzałeczką</p>
