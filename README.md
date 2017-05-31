@@ -14,7 +14,7 @@
 <p>Teraz rozwijamy sobie wszystkie główne katalogi w QT i kompilujemy podprojekty w odpowiedniej kolejności. <b>W kolejności tinyxml2 -> opennn -> examples/logical_operators -> aiproject</b> A robimy to tak że klikamy kursorem na plik *.pro w danym podprojekcie i w górnym menu Budowanie -> klikamy "Zbuduj podprojekt .nazwapodprojektu."</p>
 
 <p>Możliwe że wcześniej (przed wszystkim) trzeba kliknąć w menu Budowanie "uruchom qmake"!</p>
-<p> I teraz możemy już wybrać jaki projekt w jakim trybie będzie budowany zieloną strzałeczką jak poniżej</p>
+<p> I teraz możemy już wybrać jaki projekt w jakim trybie będzie budowany jak poniżej</p>
 
 <img src="http://i.imgur.com/nZMguw5.png?1" alt="IMG Choose Target Build" />
 
