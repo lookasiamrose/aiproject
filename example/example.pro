@@ -1,9 +1,9 @@
 ###################################################################################################
 #                                                                                                 #
 #   OpenNN: Open Neural Networks Library                                                          #
-#   www.opennn.net                                                                                #
+#   www.artelnics.com/opennn                                                                      #
 #                                                                                                 #
-#   O P E N N N   P R O J E C T                                                                   #
+#   O P E N N N   E X A M P L E S                                                                 #
 #                                                                                                 #
 #   Roberto Lopez                                                                                 #
 #   Artelnics - Making intelligent use of data                                                    #
@@ -11,18 +11,9 @@
 #                                                                                                 #
 ###################################################################################################
 
-# CONFIGURATION
-
-QT += core gui
 TEMPLATE = subdirs
 
 CONFIG += ordered
 
-CONFIG(release, debug|release) {
-DEFINES += NDEBUG
-}
+SUBDIRS += logical_operations
 
-SUBDIRS += tinyxml2
-SUBDIRS += opennn
-SUBDIRS += example
-SUBDIRS += aiproject
