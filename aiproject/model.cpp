@@ -10,7 +10,7 @@ Model::Model(QObject *parent) : QObject(parent)
 }
 QImage* Model::movementSweden()
 {
-    QString desktopPath = "C:/Users/lukasz.jamroz/Desktop/";
+    QString desktopPath = QCoreApplication::applicationDirPath() + "/DATA/";
     privImage = new QImage(desktopPath + "colorsample.jpg");
     QImage::Format format = privImage->format();
 
@@ -23,7 +23,7 @@ QImage* Model::test(QImage* img)
 {
     if(img != nullptr) delete img;
 
-    QString desktopPath = "C:/Users/lukasz.jamroz/Desktop/";
+    QString desktopPath = QCoreApplication::applicationDirPath() + "/DATA/";
     img = new QImage(desktopPath + "threeblackcross.jpg");
 
     QSize rect = img->size();
@@ -37,7 +37,7 @@ QImage* Model::test(QImage* img)
         }
     }
 
-    this->saveImageAsInGreyscaleHTML(img,"C:/Users/lukasz.jamroz/Desktop/img",Normalization::HIGHLIGHTED);
+    this->saveImageAsInGreyscaleHTML(img,QCoreApplication::applicationDirPath() + "/DATA/capture",Normalization::HIGHLIGHTED);
 
     return img;
 }
