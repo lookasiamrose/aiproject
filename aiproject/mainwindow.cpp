@@ -43,4 +43,7 @@ void MainWindow::on_pushButton_clicked()
     QImage* test = model->test(img);
     myLabel->setPixmap(QPixmap::fromImage(*test));
     myLabel->show();
+    img = test;
+    QString path = QCoreApplication::applicationDirPath() + "/DATA/";
+    test->save(path+"output.png","PNG",100);
 }

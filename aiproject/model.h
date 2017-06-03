@@ -16,6 +16,7 @@ public:
     QImage* test(QImage* img);
 
     void saveImageAsInGreyscaleHTML(const QImage* img_arg, const QString path_arg, Normalization normalize_arg = Normalization::NO);
+    QImage* simplifyImageWithFactorSharp(const QImage* img_arg, double factor_arg);
 
 private:
     QImage* privImage;

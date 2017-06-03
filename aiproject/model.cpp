@@ -21,10 +21,10 @@ Model::~Model()
 }
 QImage* Model::test(QImage* img)
 {
-    if(img != nullptr) delete img;
+    //if(img != nullptr) delete img;
 
     QString desktopPath = QCoreApplication::applicationDirPath() + "/DATA/";
-    img = new QImage(desktopPath + "threeblackcross.jpg");
+    //img = new QImage(desktopPath + "threeblackcross.jpg");
 
     QSize rect = img->size();
     for(int y = 0; y < rect.height(); y++)
@@ -36,12 +36,36 @@ QImage* Model::test(QImage* img)
             img->setPixelColor(x,y,QColor(g, g, g).rgb());
         }
     }
+    QImage* newImg = this->simplifyImageWithFactorSharp(img,0.75);
+    delete img;
 
-    this->saveImageAsInGreyscaleHTML(img,QCoreApplication::applicationDirPath() + "/DATA/capture",Normalization::HIGHLIGHTED);
+    this->saveImageAsInGreyscaleHTML(newImg,QCoreApplication::applicationDirPath() + "/DATA/capture",Normalization::HIGHLIGHTED);
 
-    return img;
+    return newImg;
 }
+QImage* Model::simplifyImageWithFactorSharp(const QImage* img_arg, double factor_arg)
+{
+    int heightFactored = qRound((double) img_arg->height()*factor_arg);
+    int widthFactored = qRound((double) img_arg->width()*factor_arg);
+    QImage* imgSimplified = new QImage(widthFactored,heightFactored,QImage::Format::Format_RGB32);
 
+    double iterator = static_cast<double>(static_cast<int>(100/factor_arg+0.5))/100.0;
+    for(int y = 0; y < imgSimplified->height(); y++)
+    {
+        for(int x = 0; x < imgSimplified->width(); x++)
+        {
+            double secondX = x*iterator;
+            double secondY = y*iterator;
+            (secondX >= img_arg->width()) ? secondX = img_arg->width()-1 : secondX = secondX;
+            (secondY >= img_arg->height()) ? secondY = img_arg->height()-1 : secondY = secondY;
+
+            int singleValPixel = qRed(img_arg->pixel(secondX,secondY));
+            imgSimplified->setPixel(x,y,QColor(singleValPixel, singleValPixel, singleValPixel).rgb());
+        }
+    }
+
+    return imgSimplified;
+}
 void Model::saveImageAsInGreyscaleHTML(const QImage* img_arg, const QString path_arg, Normalization normalize_arg)
 {
     QStringList doc;
