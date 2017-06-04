@@ -11,8 +11,8 @@ Model::Model(QObject *parent) : QObject(parent)
 QImage* Model::movementSweden()
 {
     QString desktopPath = QCoreApplication::applicationDirPath() + "/DATA/";
-    privImage = new QImage(desktopPath + "colorsample.jpg");
-    QImage::Format format = privImage->format();
+    privImage = new QImage(desktopPath + "threeblackcross.jpg");
+    //QImage::Format format = privImage->format();
 
     return privImage;
 }
@@ -33,6 +33,62 @@ QImage* Model::test(QImage* img)
         }
     }
     return grayed;
+}
+QImage* Model::removeDuplicatePixelsVertically(const QImage* img_arg, const double tolerance_arg)
+{
+    QImage* imgResult = nullptr;
+
+    QList<QRgb*> rows;
+    for(int y = 0; y < img_arg->height(); y++)
+    {   QRgb* row = new QRgb[img_arg->width()];
+        for(int x = 0; x < img_arg->width(); x++)
+        {
+            row[x] = img_arg->pixel(x,y);
+        }
+        rows.append(row);
+    }
+
+    if(rows.size() > 1)
+    {
+        int* rowVal = new int[rows.size()];
+        for(int i = 0; i < rows.size(); i++) rowVal[i] = 0;
+
+        for(int y = 0; y < rows.size(); y++)
+        {
+            for(int x = 0; x < img_arg->width(); x++)
+            {
+                rowVal[y] += qGray(rows.at(y)[x]);
+            }
+            rowVal[y] /= img_arg->width();
+        }
+
+        QList<int> toDelete;
+        for(int y = 1; y < rows.size(); y++)
+        {
+            if(qAbs( (double) rowVal[y] - (double) rowVal[y-1]) < (tolerance_arg*255.0))
+            {
+                toDelete.append(y);
+            }
+        }
+
+        for(int i = 0; i < toDelete.size(); i++)
+        {
+            delete rows.at(toDelete.at(i));
+            rows[toDelete.at(i)] = nullptr;
+        }
+
+        rows.removeAll(nullptr);
+        imgResult = new QImage(img_arg->width(),rows.size(),QImage::Format::Format_RGB32);
+        for(int y = 0; y < imgResult->height(); y++)
+        {
+            for(int x = 0; x < imgResult->width(); x++)
+            {
+                imgResult->setPixel(x,y,rows.at(y)[x]);
+            }
+        }
+    }
+
+    return imgResult;
 }
 QImage* Model::simplifyImageWithFactorSharp(const QImage* img_arg, double factor_arg)
 {

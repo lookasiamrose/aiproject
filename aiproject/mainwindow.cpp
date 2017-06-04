@@ -76,3 +76,13 @@ void MainWindow::on_pushButton_4_clicked()
     delete img;
     img = test;
 }
+
+void MainWindow::on_pushButton_5_clicked()
+{
+    QImage* test = model->removeDuplicatePixelsVertically(img,0.01);
+    myLabel->setPixmap(QPixmap::fromImage(*test));
+    myLabel->show();
+
+    delete img;
+    img = test;
+}
