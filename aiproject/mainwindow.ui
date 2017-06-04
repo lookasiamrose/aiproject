@@ -20,10 +20,17 @@
       <property name="spacing">
        <number>1</number>
       </property>
-      <item row="0" column="0">
-       <widget class="QPushButton" name="pushButton">
+      <item row="1" column="0">
+       <widget class="QPushButton" name="pushButton_2">
         <property name="text">
-         <string>GO</string>
+         <string>HARDEN (1/3 stronger)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QPushButton" name="pushButton_3">
+        <property name="text">
+         <string>SAVEINHTML (capture.html)</string>
         </property>
        </widget>
       </item>
@@ -40,6 +47,20 @@
         </property>
        </spacer>
       </item>
+      <item row="0" column="0">
+       <widget class="QPushButton" name="pushButton">
+        <property name="text">
+         <string>GRAYSCALE</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QPushButton" name="pushButton_4">
+        <property name="text">
+         <string>SIMPLIFY (0.75)</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </item>
    </layout>
@@ -50,7 +71,7 @@
      <x>0</x>
      <y>0</y>
      <width>576</width>
-     <height>26</height>
+     <height>31</height>
     </rect>
    </property>
   </widget>

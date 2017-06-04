@@ -4,10 +4,11 @@
 #include <QImage>
 #include <QObject>
 
+enum class Normalization{ NO, STANDARD, HIGHLIGHTED };
+
 class Model : public QObject
 {
     Q_OBJECT
-    enum class Normalization{ NO, STANDARD, HIGHLIGHTED };
 public:
     QImage* pubImage;
     Model(QObject *parent = 0);
@@ -17,6 +18,8 @@ public:
 
     void saveImageAsInGreyscaleHTML(const QImage* img_arg, const QString path_arg, Normalization normalize_arg = Normalization::NO);
     QImage* simplifyImageWithFactorSharp(const QImage* img_arg, double factor_arg);
+    QImage* simplifyImageWithFactorSoft(const QImage* img_arg, double factor_arg);
+    QImage* hardenImageContrast(const QImage* img_arg, const double factor_arg);
 
 private:
     QImage* privImage;

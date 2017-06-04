@@ -21,27 +21,18 @@ Model::~Model()
 }
 QImage* Model::test(QImage* img)
 {
-    //if(img != nullptr) delete img;
-
-    QString desktopPath = QCoreApplication::applicationDirPath() + "/DATA/";
-    //img = new QImage(desktopPath + "threeblackcross.jpg");
-
-    QSize rect = img->size();
+    QImage* grayed = new QImage(*img);
+    QSize rect = grayed->size();
     for(int y = 0; y < rect.height(); y++)
     {
         for(int x = 0; x < rect.width(); x++)
         {
-            QRgb pix = img->pixel(x,y);
+            QRgb pix = grayed->pixel(x,y);
             int g = qGray(pix);
-            img->setPixelColor(x,y,QColor(g, g, g).rgb());
+            grayed->setPixelColor(x,y,QColor(g, g, g).rgb());
         }
     }
-    QImage* newImg = this->simplifyImageWithFactorSharp(img,0.75);
-    delete img;
-
-    this->saveImageAsInGreyscaleHTML(newImg,QCoreApplication::applicationDirPath() + "/DATA/capture",Normalization::HIGHLIGHTED);
-
-    return newImg;
+    return grayed;
 }
 QImage* Model::simplifyImageWithFactorSharp(const QImage* img_arg, double factor_arg)
 {
@@ -65,6 +56,109 @@ QImage* Model::simplifyImageWithFactorSharp(const QImage* img_arg, double factor
     }
 
     return imgSimplified;
+}
+QImage* Model::simplifyImageWithFactorSoft(const QImage* img_arg, double factor_arg)
+{
+    int heightFactored = qRound((double) img_arg->height()*factor_arg);
+    int widthFactored = qRound((double) img_arg->width()*factor_arg);
+    QImage* imgSimplified = new QImage(widthFactored,heightFactored,QImage::Format::Format_RGB32);
+
+    double iterator = static_cast<double>(static_cast<int>(100/factor_arg+0.5))/100.0;
+    for(int y = 0; y < imgSimplified->height(); y++)
+    {
+        for(int x = 0; x < imgSimplified->width(); x++)
+        {
+            double halfIterator = iterator*0.5;
+            double secondX = x*iterator;
+            double secondY = y*iterator;
+
+            int pixelCounter = 0;
+            int pixelSum = 0;
+            int pixelSumG = 0;
+            int pixelSumB = 0;
+            for(int ycorner = (secondY-halfIterator);ycorner<(secondY+halfIterator);ycorner++)
+            {
+                for(int xcorner = (secondX-halfIterator);xcorner<(secondX+halfIterator);xcorner++)
+                {
+                    if(xcorner >= img_arg->width()) xcorner = img_arg->width()-1;
+                    else if(xcorner < 0) xcorner = 0;
+                    if(ycorner >= img_arg->height()) ycorner = img_arg->height()-1;
+                    else if(ycorner < 0) ycorner = 0;
+
+                    pixelSum += qRed(img_arg->pixel(xcorner,ycorner));
+                    pixelSumG += qGreen(img_arg->pixel(xcorner,ycorner));
+                    pixelSumB += qBlue(img_arg->pixel(xcorner,ycorner));
+                    pixelCounter++;
+                }
+            }
+            if(pixelCounter == 0)
+            {
+                (secondX >= img_arg->width()) ? secondX = img_arg->width()-1 : secondX = secondX;
+                (secondY >= img_arg->height()) ? secondY = img_arg->height()-1 : secondY = secondY;
+                pixelSum = qRed(img_arg->pixel(secondX,secondY));
+                pixelSumG = qGreen(img_arg->pixel(secondX,secondY));
+                pixelSumB = qBlue(img_arg->pixel(secondX,secondY));
+            }else
+            {
+                pixelSum /= pixelCounter;
+                pixelSumG /= pixelCounter;
+                pixelSumB /= pixelCounter;
+            }
+
+            imgSimplified->setPixel(x,y,QColor(pixelSum, pixelSumG, pixelSumB).rgb());
+        }
+    }
+
+    return imgSimplified;
+}
+QImage* Model::hardenImageContrast(const QImage* img_arg, const double factor_arg)
+{
+    QImage* imgHarden = new QImage(*img_arg);
+
+    for(int y = 0; y < imgHarden->height(); y++)
+    {
+        for(int x = 0; x < imgHarden->width(); x++)
+        {
+            QRgb pixel = imgHarden->pixel(x,y);
+
+            int absRed = qRed(pixel);
+            if(qRed(pixel)-127.5 < 0){
+                double red = qRed(pixel);
+                red *= factor_arg;
+                absRed -= red;
+            }else{
+                double red = 255.0 - qRed(pixel);
+                red *= factor_arg;
+                absRed += red;
+            }
+
+            int absGreen = qGreen(pixel);
+            if(qGreen(pixel)-127.5 < 0){
+                double green = qGreen(pixel);
+                green *= factor_arg;
+                absGreen -= green;
+            }else{
+                double green = 255.0 - qGreen(pixel);
+                green *= factor_arg;
+                absGreen += green;
+            }
+
+            int absBlue = qBlue(pixel);
+            if(qBlue(pixel)-127.5 < 0){
+                double blue = qBlue(pixel);
+                blue *= factor_arg;
+                absBlue -= blue;
+            }else{
+                double blue = 255.0 - qBlue(pixel);
+                blue *= factor_arg;
+                absBlue += blue;
+            }
+
+            imgHarden->setPixel(x,y,QColor(absRed, absGreen, absBlue).rgb());
+        }
+    }
+
+    return imgHarden;
 }
 void Model::saveImageAsInGreyscaleHTML(const QImage* img_arg, const QString path_arg, Normalization normalize_arg)
 {
