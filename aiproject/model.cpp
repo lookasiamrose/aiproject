@@ -32,7 +32,29 @@ QImage* Model::test(QImage* img)
             grayed->setPixelColor(x,y,QColor(g, g, g).rgb());
         }
     }
+
+    OpenNN::Matrix<double>* retMatrix;
+    retMatrix = normalizeImageIntoNormMatrix(grayed);
+    saveMatrixIntoHTMLTable(retMatrix,QCoreApplication::applicationDirPath() + "/DATA/normal");
+    delete retMatrix;
+
     return grayed;
+}
+OpenNN::Matrix<double>* Model::normalizeImageIntoNormMatrix(const QImage* img_arg)
+{
+    OpenNN::Matrix<double>* matrix = new OpenNN::Matrix<double>(img_arg->height(),img_arg->width());
+    for(int y = 0; y < img_arg->height(); y++)
+    {
+        OpenNN::Vector<double> row;
+        for(int x = 0; x < img_arg->width(); x++)
+        {
+            double grayScale = (double) qGray(img_arg->pixel(x,y));
+            grayScale /= 255.0; //max value division, 0-255 -> 0.0 - 1.0
+            row = row.insert_element(x,grayScale);
+        }
+        matrix->set_row(y,row);
+    }
+    return matrix;
 }
 QImage* Model::removeDuplicatePixelsVertically(const QImage* img_arg, const double tolerance_arg)
 {
@@ -84,6 +106,62 @@ QImage* Model::removeDuplicatePixelsVertically(const QImage* img_arg, const doub
             for(int x = 0; x < imgResult->width(); x++)
             {
                 imgResult->setPixel(x,y,rows.at(y)[x]);
+            }
+        }
+    }
+
+    return imgResult;
+}
+QImage* Model::removeDuplicatePixelsHorizontally(const QImage* img_arg, const double tolerance_arg)
+{
+    QImage* imgResult = nullptr;
+
+    QList<QRgb*> columns;
+    for(int x = 0; x < img_arg->width(); x++)
+    {   QRgb* column = new QRgb[img_arg->height()];
+        for(int y = 0; y < img_arg->height(); y++)
+        {
+            column[y] = img_arg->pixel(x,y);
+        }
+        columns.append(column);
+    }
+
+    if(columns.size() > 1)
+    {
+        int* colVal = new int[columns.size()];
+        for(int i = 0; i < columns.size(); i++) colVal[i] = 0;
+
+        for(int x = 0; x < columns.size(); x++)
+        {
+            for(int y = 0; y < img_arg->height(); y++)
+            {
+                colVal[x] += qGray(columns.at(x)[y]);
+            }
+            colVal[x] /= img_arg->height();
+        }
+
+        QList<int> toDelete;
+        for(int x = 1; x < columns.size(); x++)
+        {
+            if(qAbs( (double) colVal[x] - (double) colVal[x-1]) < (tolerance_arg*255.0))
+            {
+                toDelete.append(x);
+            }
+        }
+
+        for(int i = 0; i < toDelete.size(); i++)
+        {
+            delete columns.at(toDelete.at(i));
+            columns[toDelete.at(i)] = nullptr;
+        }
+
+        columns.removeAll(nullptr);
+        imgResult = new QImage(columns.size(),img_arg->height(),QImage::Format::Format_RGB32);
+        for(int x = 0; x < imgResult->width(); x++)
+        {
+            for(int y = 0; y < imgResult->height(); y++)
+            {
+                imgResult->setPixel(x,y,columns.at(x)[y]);
             }
         }
     }
@@ -277,6 +355,54 @@ void Model::saveImageAsInGreyscaleHTML(const QImage* img_arg, const QString path
     doc.append(QString("</body>"));
 
     QFile file(path_arg + ".html");
+    file.resize(0);
+    if (file.open(QIODevice::ReadWrite))
+    {
+        QTextStream stream(&file);
+        for(int i=0;i<doc.size();i++)
+        {
+            stream<<doc.at(i)<<endl;
+        }
+    }
+
+}
+void Model::saveMatrixIntoHTMLTable(const OpenNN::Matrix<double>* matrix_arg, const QString path_arg)
+{
+    QStringList doc;
+    doc.append(QString("<!DOCTYPE html>"));
+    doc.append(QString("<head>"));
+    doc.append(QString("<style>"));
+    doc.append(QString("td{ border: 1px solid #333; }"));
+    doc.append(QString(".highlighted{ background-color: #AED1E6; }"));
+    doc.append(QString("</style>"));
+    doc.append(QString("</head>"));
+
+    doc.append(QString("<body>"));
+    doc.append(QString("<table style=\"border-collapse: collapse; text-align: center;\">"));
+
+    for(int y = 0; y < matrix_arg->get_rows_number(); y++)
+    {
+        QString row = "<tr>\n";
+        for(int x = 0; x < matrix_arg->get_columns_number(); x++)
+        {
+            double pixel = matrix_arg->operator ()(y,x);
+            row += "<td>";
+            if(pixel < 0.51)
+            {
+                row = row.left(row.length()-1);
+                row += " class=\"highlighted\">";
+            }
+            row += QString::number(pixel,'f',2);
+            row += "</td>\n";
+        }
+        doc.append(row += "</tr>");
+    }
+
+    doc.append(QString("</table>"));
+    doc.append(QString("</body>"));
+
+    QFile file(path_arg + ".html");
+    file.resize(0);
     if (file.open(QIODevice::ReadWrite))
     {
         QTextStream stream(&file);

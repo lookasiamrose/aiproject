@@ -4,6 +4,8 @@
 #include <QImage>
 #include <QObject>
 
+#include "../opennn/opennn.h"
+
 enum class Normalization{ NO, STANDARD, HIGHLIGHTED };
 
 class Model : public QObject
@@ -21,6 +23,9 @@ public:
     QImage* simplifyImageWithFactorSoft(const QImage* img_arg, double factor_arg);
     QImage* hardenImageContrast(const QImage* img_arg, const double factor_arg);
     QImage* removeDuplicatePixelsVertically(const QImage* img_arg, const double tolerance_arg);
+    QImage* removeDuplicatePixelsHorizontally(const QImage* img_arg, const double tolerance_arg);
+    OpenNN::Matrix<double>* normalizeImageIntoNormMatrix(const QImage* img_arg);
+    void saveMatrixIntoHTMLTable(const OpenNN::Matrix<double>* matrix_arg, const QString path_arg);
 
 private:
     QImage* privImage;

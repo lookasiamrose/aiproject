@@ -16,8 +16,8 @@ MainWindow::MainWindow(QWidget *parent) :
     myLabel->setPixmap(QPixmap::fromImage(*img));
     myLabel->show();
 
-    ui->gridLayout->addWidget(myLabel);
-    myLabel->setAlignment(Qt::AlignCenter);
+    ui->gridLayout->addWidget(myLabel,2,2,Qt::AlignRight);
+    myLabel->setAlignment(Qt::AlignRight);
 
     QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect(this);
     effect->setBlurRadius(15);
@@ -36,6 +36,10 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+
+    foreach(QImage* img , history){
+        delete img;
+    }
 }
 
 void MainWindow::on_pushButton_clicked()
@@ -44,12 +48,8 @@ void MainWindow::on_pushButton_clicked()
     myLabel->setPixmap(QPixmap::fromImage(*test));
     myLabel->show();
 
-    delete img;
+    history.append(img);
     img = test;
-
-
-    QString path = QCoreApplication::applicationDirPath() + "/DATA/";
-    test->save(path+"output.png","PNG",100);
 }
 
 void MainWindow::on_pushButton_2_clicked()
@@ -58,7 +58,7 @@ void MainWindow::on_pushButton_2_clicked()
     myLabel->setPixmap(QPixmap::fromImage(*test));
     myLabel->show();
 
-    delete img;
+    history.append(img);
     img = test;
 }
 
@@ -73,7 +73,7 @@ void MainWindow::on_pushButton_4_clicked()
     myLabel->setPixmap(QPixmap::fromImage(*test));
     myLabel->show();
 
-    delete img;
+    history.append(img);
     img = test;
 }
 
@@ -83,6 +83,44 @@ void MainWindow::on_pushButton_5_clicked()
     myLabel->setPixmap(QPixmap::fromImage(*test));
     myLabel->show();
 
-    delete img;
+    history.append(img);
     img = test;
+}
+
+void MainWindow::on_pushButton_6_clicked()
+{
+    QImage* test = model->removeDuplicatePixelsHorizontally(img,0.01);
+    myLabel->setPixmap(QPixmap::fromImage(*test));
+    myLabel->show();
+
+    history.append(img);
+    img = test;
+}
+
+void MainWindow::on_pushButton_7_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->page_2);
+}
+
+void MainWindow::on_pushButton_8_clicked()
+{
+    qDebug()<<"goes";
+}
+
+void MainWindow::on_pushButton_9_clicked()
+{
+    QString path = QCoreApplication::applicationDirPath() + "/DATA/";
+    img->save(path+"output.png","PNG",100);
+}
+
+void MainWindow::on_pushButton_10_clicked()
+{
+    if(!history.isEmpty()){
+        myLabel->setPixmap(QPixmap::fromImage(*history.last()));
+        myLabel->show();
+
+        delete img;
+        img = history.last();
+        history.pop_back();
+    }
 }
