@@ -27,6 +27,9 @@ public:
     OpenNN::Matrix<double>* normalizeImageIntoNormMatrix(const QImage* img_arg);
     void saveMatrixIntoHTMLTable(const OpenNN::Matrix<double>* matrix_arg, const QString path_arg);
     void incrementCurrentImageIndex();
+    void saveOperations(QString time_arg, QStringList& image_operations_history_arg);
+    void saveMatrix(OpenNN::Matrix<double>* matrix_arg, QString path_arg);
+    void decrementCurrentImageIndex();
 
     class HelperOperationsWithin
     {

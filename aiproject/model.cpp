@@ -20,10 +20,18 @@ void Model::incrementCurrentImageIndex()
     HelperOperationsWithin helper;
     operationsHistory.push_front(helper);
 }
+void Model::decrementCurrentImageIndex()
+{
+    if(!operationsHistory.isEmpty())
+    {
+        currentImageIndex--;
+        operationsHistory.pop_front();
+    }
+}
 void Model::collectItemPoint(int r, int c)
 {
     if(currentImageIndex >= 0){
-        QString cords = "x (matrix column): "+QString::number(c)+"y (matrix row): "+QString::number(r);
+        QString cords = "\t<point>\n\t\t<x dsc=\"matrix column\">"+QString::number(c)+"</x>\n\t\t<y dsc=\"matrix row\">"+QString::number(r)+"</y>\n\t</point>";
         if( !operationsHistory[currentImageIndex].chosenCordsPairs.contains(cords) ){
             operationsHistory[currentImageIndex].chosenCordsPairs.append(cords);
         }else{
@@ -33,7 +41,37 @@ void Model::collectItemPoint(int r, int c)
         qDebug()<<"Image history has not been initialized!";
     }
 }
+void Model::saveOperations(QString time_arg, QStringList& image_operations_history_arg)
+{
+    QStringList doc;
+    QString path = QCoreApplication::applicationDirPath() + "/RESULTS/";
+    path += time_arg + ".xml";
 
+    doc.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+    doc.append("<results>");
+    foreach( QString item, operationsHistory.first().chosenCordsPairs)
+    {
+       doc.append(item);
+    }
+    doc.append("</results>");
+
+    doc.append("<operations>");
+    doc.append(image_operations_history_arg);
+    doc.append("</operations>");
+
+    QFile file(path);
+    if (file.open(QIODevice::WriteOnly))
+    {
+        QTextStream stream(&file);
+        for(int i=0;i<doc.size();i++)
+        {
+            stream<<doc.at(i)<<endl;
+        }
+        file.close();
+    }else{
+        qDebug()<<file.errorString();
+    }
+}
 Model::~Model()
 {
 }
@@ -51,10 +89,10 @@ QImage* Model::test(QImage* img)
         }
     }
 
-    OpenNN::Matrix<double>* retMatrix;
+    /*OpenNN::Matrix<double>* retMatrix;
     retMatrix = normalizeImageIntoNormMatrix(grayed);
     saveMatrixIntoHTMLTable(retMatrix,QCoreApplication::applicationDirPath() + "/DATA/normal");
-    delete retMatrix;
+    delete retMatrix;*/
 
     return grayed;
 }
@@ -73,6 +111,27 @@ OpenNN::Matrix<double>* Model::normalizeImageIntoNormMatrix(const QImage* img_ar
         matrix->set_row(y,row);
     }
     return matrix;
+}
+void Model::saveMatrix(OpenNN::Matrix<double>* matrix_arg, QString path_arg)
+{
+    QString path = QCoreApplication::applicationDirPath() + "/RESULTS/";
+    QFile file(path + path_arg + ".dat");
+    file.resize(0);
+    if (file.open(QIODevice::WriteOnly))
+    {
+        QTextStream stream(&file);
+        for(int y = 0; y < matrix_arg->get_rows_number(); y++)
+        {
+            QString row;
+            for(int x = 0; x < matrix_arg->get_columns_number(); x++)
+            {
+               row += QString::number( matrix_arg->operator ()(y,x) ,'f',2) + " ";
+            }
+            row.left(row.length()-2);
+            stream<<row<<endl;
+        }
+        file.close();
+    }
 }
 QImage* Model::removeDuplicatePixelsVertically(const QImage* img_arg, const double tolerance_arg)
 {

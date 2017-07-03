@@ -88,6 +88,8 @@ private:
     QGraphicsScene* scene;
     QGraphicsView* graph;
     Graphics_view_zoom* z;
+    QStringList imageOperationsHistory;
+    QImage* original;
 };
 
 #endif // MAINWINDOW_H

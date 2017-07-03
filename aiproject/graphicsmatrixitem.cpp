@@ -22,11 +22,12 @@ void GraphicsMatrixItem::mouseDoubleClickEvent(QGraphicsSceneMouseEvent * event)
     emit pushPointToModel(data(1).toInt(),data(0).toInt());
     if( myBrush != QBrush(Qt::green) )
     {
+        defaultBrush = myBrush;
         myBrush = QBrush(Qt::green);
     }else{
         myBrush = defaultBrush;
     }
-    this->setBrush( myBrush ); //REPAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIR
+    this->setBrush( myBrush );
 }
 void GraphicsMatrixItem::setModel(Model* model_arg)
 {

@@ -8,6 +8,9 @@
 #include <QDropEvent>
 #include <QMimeData>
 #include <QSizePolicy>
+#include <QMessageBox>
+#include <QDateTime>
+#include <QDir>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -20,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     model = new Model(this);
     img = model->movementSweden();
+    original = new QImage(*img);
     ui->checkBox->setChecked(true);
     //ui->stackedWidget->setAcceptDrops(true);
 
@@ -75,7 +79,11 @@ void MainWindow::dropEvent(QDropEvent *event){
     QList<QUrl> urls = event->mimeData()->urls(); //take basic paths and urls from MIME
     QUrl url = urls.at(0);
     delete img;
+
+    if(original != nullptr) delete original;
+
     img = new QImage(url.toLocalFile());
+    original = new QImage(*img);
 
     QPixmap p = QPixmap::fromImage(*img); // load pixmap
     int h = ui->ImagePlaceHolder->height();
@@ -120,6 +128,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_clicked()
 {
     QImage* test = model->test(img);
+    imageOperationsHistory.append("\t\t<greyscale></greyscale>");
     myLabel->setPixmap(QPixmap::fromImage(*test));
     myLabel->show();
 
@@ -130,6 +139,7 @@ void MainWindow::on_pushButton_clicked()
 void MainWindow::on_pushButton_2_clicked()
 {
     QString line = ui->lineEdit_4->text();
+    imageOperationsHistory.append("\t\t<contrast>"+line+"</contrast>");
     QImage* test = model->hardenImageContrast(img,line.toDouble());
     myLabel->setPixmap(QPixmap::fromImage(*test));
     myLabel->show();
@@ -147,6 +157,7 @@ void MainWindow::on_pushButton_4_clicked()
 {
     QString line = ui->lineEdit_3->text();
     if(line.toDouble() < 1.00){
+        imageOperationsHistory.append("\t\t<simplify dsc=\"standard\">"+line+"</simplify>");
         QImage* test = model->simplifyImageWithFactorSoft(img,line.toDouble());
         myLabel->setPixmap(QPixmap::fromImage(*test));
         myLabel->show();
@@ -159,6 +170,7 @@ void MainWindow::on_pushButton_4_clicked()
 void MainWindow::on_pushButton_5_clicked()
 {
     QString line = ui->lineEdit->text();
+    imageOperationsHistory.append("\t\t<pixels-removed-vertically>"+line+"</pixels-removed-vertically>");
     QImage* test = model->removeDuplicatePixelsVertically(img,line.toDouble());
     myLabel->setPixmap(QPixmap::fromImage(*test));
     myLabel->show();
@@ -170,6 +182,7 @@ void MainWindow::on_pushButton_5_clicked()
 void MainWindow::on_pushButton_6_clicked()
 {
     QString line = ui->lineEdit_2->text();
+    imageOperationsHistory.append("\t\t<pixels-removed-horizontally>"+line+"</pixels-removed-horizontally>");
     QImage* test = model->removeDuplicatePixelsHorizontally(img,line.toDouble());
     myLabel->setPixmap(QPixmap::fromImage(*test));
     myLabel->show();
@@ -228,10 +241,6 @@ void MainWindow::on_pushButton_8_clicked()
 
     delete retMatrix;
 }
-void MainWindow::completedTableClicked()
-{
-    qDebug()<<"completed";
-}
 void MainWindow::on_pushButton_9_clicked()
 {
     QString path = QCoreApplication::applicationDirPath() + "/DATA/";
@@ -243,6 +252,7 @@ void MainWindow::on_pushButton_10_clicked()
     if(!history.isEmpty()){
         myLabel->setPixmap(QPixmap::fromImage(*history.last()));
         myLabel->show();
+        imageOperationsHistory.pop_back();
 
         delete img;
         img = history.last();
@@ -253,6 +263,7 @@ void MainWindow::on_pushButton_10_clicked()
 void MainWindow::on_pushButton_11_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->page);
+    model->decrementCurrentImageIndex();
 }
 
 void MainWindow::on_checkBox_stateChanged(int arg1)
@@ -279,4 +290,32 @@ void MainWindow::on_pushButton_GoBack_clicked()
 void MainWindow::on_pushButton_GoBack_2_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->page_3);
+}
+void MainWindow::completedTableClicked()
+{
+    int response = QMessageBox::question(graph,"Confirmation",
+                                         "Are you sure to save and proceed?",
+                                         QMessageBox::Cancel,QMessageBox::Yes);
+    if(response == 16384){
+        QDateTime curr = QDateTime::currentDateTime();
+        QString time = curr.toString().replace(":","_");
+
+        if(!QDir("RESULTS/result-"+time).exists()){
+            QDir().mkdir("RESULTS/result-"+time);
+        }
+
+        original->save(QCoreApplication::applicationDirPath()+"/RESULTS/"+"/result-"+time+"/__original_image.png","PNG",100);
+        OpenNN::Matrix<double>* matrix = model->normalizeImageIntoNormMatrix(original);
+        model->saveMatrix(matrix,"/result-"+time+"/__original_matrix");
+        delete matrix;
+
+        img->save(QCoreApplication::applicationDirPath()+"/RESULTS/"+"/result-"+time+"/__processed_image.png","PNG",100);
+        matrix = model->normalizeImageIntoNormMatrix(img);
+        model->saveMatrix(matrix,"/result-"+time+"/__processed_matrix");
+        delete matrix;
+
+        model->saveOperations("/result-"+time+"/__relevant_data",imageOperationsHistory);
+
+        graph->close();
+    }
 }
