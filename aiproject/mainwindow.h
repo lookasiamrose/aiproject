@@ -22,6 +22,10 @@
 
 #include "model.h"
 #include <QLabel>
+#include <QtWebEngineWidgets/QWebEngineView>
+#include <QGraphicsView>
+#include <QGraphicsScene>
+#include "graphics_view_zoom.h"
 
 namespace Ui {
 class MainWindow;
@@ -56,6 +60,23 @@ private slots:
 
     void on_pushButton_10_clicked();
 
+    void on_pushButton_11_clicked();
+
+    void dragEnterEvent(QDragEnterEvent *event);
+    void dropEvent(QDropEvent *event);
+    void resizeEvent(QResizeEvent *event);
+
+    void on_checkBox_stateChanged(int arg1);
+
+    void on_pushButton_LearnTheOpenNN_clicked();
+
+    void on_pushButton_ConvertToExcel_clicked();
+
+    void on_pushButton_GoBack_clicked();
+
+    void on_pushButton_GoBack_2_clicked();
+    void completedTableClicked();
+
 private:
     Ui::MainWindow *ui;
     Model* model;
@@ -63,6 +84,10 @@ private:
     QImage* img;
     QLabel* myLabel;
     QList<QImage*> history;
+    QWebEngineView *view;
+    QGraphicsScene* scene;
+    QGraphicsView* graph;
+    Graphics_view_zoom* z;
 };
 
 #endif // MAINWINDOW_H

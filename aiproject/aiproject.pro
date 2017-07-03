@@ -12,6 +12,8 @@
 ###################################################################################################
 
 QT += core gui
+QT += widgets
+QT += webenginewidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -32,11 +34,15 @@ FORMS += \
 
 HEADERS += \
     mainwindow.h \
-    model.h
+    model.h \
+    graphicsmatrixitem.h \
+    graphics_view_zoom.h
 
 SOURCES += main.cpp \
     mainwindow.cpp \
-    model.cpp
+    model.cpp \
+    graphicsmatrixitem.cpp \
+    graphics_view_zoom.cpp
 
 win32-g++{
 QMAKE_LFLAGS += -static-libgcc

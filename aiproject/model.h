@@ -26,9 +26,21 @@ public:
     QImage* removeDuplicatePixelsHorizontally(const QImage* img_arg, const double tolerance_arg);
     OpenNN::Matrix<double>* normalizeImageIntoNormMatrix(const QImage* img_arg);
     void saveMatrixIntoHTMLTable(const OpenNN::Matrix<double>* matrix_arg, const QString path_arg);
+    void incrementCurrentImageIndex();
+
+    class HelperOperationsWithin
+    {
+    public:
+        QList<QString> chosenCordsPairs;
+        QList<QString> chosenImageOperations;
+    };
 
 private:
     QImage* privImage;
+    int currentImageIndex;
+    QList<HelperOperationsWithin> operationsHistory;
+public slots:
+    void collectItemPoint(int, int);
 };
 
 #endif // MODEL_H

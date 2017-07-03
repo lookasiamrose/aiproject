@@ -6,16 +6,34 @@
 
 Model::Model(QObject *parent) : QObject(parent)
 {
-
+    currentImageIndex = -1;
 }
 QImage* Model::movementSweden()
 {
     QString desktopPath = QCoreApplication::applicationDirPath() + "/DATA/";
-    privImage = new QImage(desktopPath + "threeblackcross.jpg");
-    //QImage::Format format = privImage->format();
-
+    privImage = new QImage(desktopPath + "350x150.png");
     return privImage;
 }
+void Model::incrementCurrentImageIndex()
+{
+    currentImageIndex++;
+    HelperOperationsWithin helper;
+    operationsHistory.push_front(helper);
+}
+void Model::collectItemPoint(int r, int c)
+{
+    if(currentImageIndex >= 0){
+        QString cords = "x (matrix column): "+QString::number(c)+"y (matrix row): "+QString::number(r);
+        if( !operationsHistory[currentImageIndex].chosenCordsPairs.contains(cords) ){
+            operationsHistory[currentImageIndex].chosenCordsPairs.append(cords);
+        }else{
+            operationsHistory[currentImageIndex].chosenCordsPairs.removeOne(cords);
+        }
+    }else{
+        qDebug()<<"Image history has not been initialized!";
+    }
+}
+
 Model::~Model()
 {
 }
