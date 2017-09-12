@@ -4,7 +4,11 @@
 #include <QImage>
 #include <QObject>
 
+#include <math.h>
+#include <time.h>
 #include "../opennn/opennn.h"
+
+using namespace OpenNN;
 
 enum class Normalization{ NO, STANDARD, HIGHLIGHTED };
 
@@ -30,6 +34,8 @@ public:
     void saveOperations(QString time_arg, QStringList& image_operations_history_arg);
     void saveMatrix(OpenNN::Matrix<double>* matrix_arg, QString path_arg);
     void decrementCurrentImageIndex();
+    OpenNN::Matrix<double>* createMatrixFromDataFile(QString path);
+    QList< OpenNN::Matrix<double>* > createSquaresFromMatrix(OpenNN::Matrix<double>* matrix, int squareA);
 
     class HelperOperationsWithin
     {
@@ -38,10 +44,18 @@ public:
         QList<QString> chosenImageOperations;
     };
 
+    void initiateNeuralNetworkData(QString dataFileNameArg);
+
 private:
     QImage* privImage;
     int currentImageIndex;
     QList<HelperOperationsWithin> operationsHistory;
+
+    //Neural network
+    DataSet* dataSet;
+    NeuralNetwork* neuralNetwork;
+    LossIndex* lossIndex;
+    TrainingStrategy* trainingStrategy;
 public slots:
     void collectItemPoint(int, int);
 };

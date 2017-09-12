@@ -7,6 +7,8 @@
 Model::Model(QObject *parent) : QObject(parent)
 {
     currentImageIndex = -1;
+
+    srand((unsigned)time(NULL));
 }
 QImage* Model::movementSweden()
 {
@@ -127,7 +129,7 @@ void Model::saveMatrix(OpenNN::Matrix<double>* matrix_arg, QString path_arg)
             {
                row += QString::number( matrix_arg->operator ()(y,x) ,'f',2) + " ";
             }
-            row.left(row.length()-2);
+            row.left(row.length()-1);
             stream<<row<<endl;
         }
         file.close();
@@ -489,4 +491,51 @@ void Model::saveMatrixIntoHTMLTable(const OpenNN::Matrix<double>* matrix_arg, co
         }
     }
 
+}
+void Model::initiateNeuralNetworkData(QString dataFileNameArg)
+{
+    dataSet = new DataSet();
+    dataSet->set_data_file_name(dataFileNameArg.toStdString());
+
+    dataSet->load_data();
+
+    Variables* variablesPointer = dataSet->get_variables_pointer();
+
+    //variables_pointer->set(2, 6);
+
+    const Matrix<std::string> inputs_information = variablesPointer->arrange_inputs_information();
+    const Matrix<std::string> targets_information = variablesPointer->arrange_targets_information();
+}
+OpenNN::Matrix<double>* Model::createMatrixFromDataFile(QString path)
+{
+    OpenNN::Matrix<double>* matrix = new OpenNN::Matrix<double>(path.toStdString());
+    return matrix;
+}
+QList< OpenNN::Matrix<double>* > Model::createSquaresFromMatrix(OpenNN::Matrix<double>* matrix, int squareA)
+{
+    QList< OpenNN::Matrix<double>* > squaresList;
+
+    for(int y = 1; y < matrix->get_rows_number(); y++)
+    {
+        for(int x = 1; x < matrix->get_columns_number(); x++)
+        {
+           if( (x%squareA == 0)&&(y%squareA == 0)&&(y!=0)&&(x!=0) )
+           {
+               OpenNN::Matrix<double>* subMatrix = new OpenNN::Matrix<double>(20,20);
+               for(int i=0;i<squareA;i++)
+               {
+                    OpenNN::Vector<double> row;
+                    for(int xX = 0; xX < squareA; xX++)
+                    {
+                        double element = matrix->operator ()(y-squareA+i,x-squareA+xX);
+                        qDebug()<<" element :"<<element;
+                        row = row.insert_element(xX,element);
+                    }
+                    subMatrix->set_row(i,row);
+               }
+               squaresList.append(subMatrix);
+           }
+        }
+    }
+    return squaresList;
 }

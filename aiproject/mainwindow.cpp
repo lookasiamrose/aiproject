@@ -11,6 +11,10 @@
 #include <QMessageBox>
 #include <QDateTime>
 #include <QDir>
+#include <QFileDialog>
+#include <QtXml/QtXml>
+
+#define SQUARE_A 20
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -318,4 +322,99 @@ void MainWindow::completedTableClicked()
 
         graph->close();
     }
+}
+
+void MainWindow::on_pushButton_12_clicked()
+{
+    reworkDataAndTargetFiles();
+    /*QString dataFile = QFileDialog::getOpenFileName(this,
+                                                    tr("Open File"),
+                                                    QCoreApplication::applicationDirPath()
+                                                   ,"All files (*.*);; Open file (*.dat)");
+    if(!dataFile.isEmpty())
+    {
+        model->initiateNeuralNetworkData(dataFile);
+    }*/
+}
+void MainWindow::reworkDataAndTargetFiles()
+{
+
+    QString dataFile = QFileDialog::getOpenFileName(this,
+                                                    tr("Open File"),
+                                                    QCoreApplication::applicationDirPath()
+                                                   ,"All files (*.*);; Open file (*.dat)");
+
+    //if(!dataFile.isEmpty())
+    //{
+        /*QString targetFile = QFileDialog::getOpenFileName(this,
+                                                        tr("Open File"),
+                                                        QCoreApplication::applicationDirPath()
+                                                       ,"All files (*.*);; Open file (*.dat)");*/
+        //if(!targetFile.isEmpty())
+        //{
+            /*QFile dataFileHandler(dataFile);
+            QFile targetFileHandler(targetFile);
+
+            if(!dataFileHandler.open(QIODevice::ReadOnly))
+                return;
+
+            QString resultFile;
+            /*while(
+            (resultFile = QFileDialog::getSaveFileName(this,
+                                                        tr("Save File"),
+                                                        QCoreApplication::applicationDirPath()
+                                                       ,"Save file (*.dat)")).isEmpty())
+            {}
+
+            QFile resultFileHandler(resultFile);*/
+            /*if(!resultFileHandler.open(QIODevice::WriteOnly))
+                return;
+
+            QTextStream dataStream(&dataFileHandler);
+            //QTextStream targetStream(&targetFileHandler);
+            QTextStream resultStream(&resultFileHandler);
+
+            QString dataLine;
+            while(!dataStream.atEnd())
+            {
+                dataLine = dataStream.readLine();
+                dataLine.remove('\n');
+                if(dataLine.right(1) != " " && !dataStream.atEnd())
+                    dataLine.append(' ');
+                resultStream<<dataLine;
+            }*/
+
+            /*QDomDocument targetDoc;
+            targetDoc.setContent(&targetFileHandler);
+            targetFileHandler.close();
+
+            QDomElement root = targetDoc.firstChildElement();
+            QDomNodeList points = root.elementsByTagName("point");
+            int numberOfOutputs = 0;
+            QString pointsToResult;
+            for(int i=0; i<points.count(); i++)
+            {
+                QDomNode node = points.at(i);
+                QString x = node.toElement().elementsByTagName("x").at(0).toElement().text();
+                QString y = node.toElement().elementsByTagName("y").at(0).toElement().text();
+                pointsToResult.append(x + " " + y + " ");
+                qDebug()<<x<<" "<<y;
+                numberOfOutputs += 2;
+            }
+            resultStream<<pointsToResult.left(pointsToResult.size() -1);
+            resultStream.flush();
+
+            dataFileHandler.close();*/
+
+            OpenNN::Matrix<double>* dataMatrix = model->createMatrixFromDataFile(dataFile);
+            QList< OpenNN::Matrix<double>* > sqList = model->createSquaresFromMatrix( dataMatrix, SQUARE_A);
+
+
+
+            //qDebug()<<numberOfOutputs;
+           // QMessageBox::information(this, "Output","Number of outputs - " + QString::number(numberOfOutputs));
+       // }else
+          //  QMessageBox::warning(this, "Deny!","No target file selected!");
+   // }else
+     //   QMessageBox::warning(this, "Deny!","No data file selected!");
 }
