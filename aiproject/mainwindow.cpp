@@ -343,13 +343,12 @@ void MainWindow::reworkDataAndTargetFiles()
                                                     tr("Open File"),
                                                     QCoreApplication::applicationDirPath()
                                                    ,"All files (*.*);; Open file (*.dat)");
-
+    QString targetFile = QFileDialog::getOpenFileName(this,
+                                                            tr("Open File"),
+                                                            QCoreApplication::applicationDirPath()
+                                                           ,"All files (*.*);; Open file (*.dat)");
     //if(!dataFile.isEmpty())
     //{
-        /*QString targetFile = QFileDialog::getOpenFileName(this,
-                                                        tr("Open File"),
-                                                        QCoreApplication::applicationDirPath()
-                                                       ,"All files (*.*);; Open file (*.dat)");*/
         //if(!targetFile.isEmpty())
         //{
             /*QFile dataFileHandler(dataFile);
@@ -371,7 +370,7 @@ void MainWindow::reworkDataAndTargetFiles()
                 return;
 
             QTextStream dataStream(&dataFileHandler);
-            //QTextStream targetStream(&targetFileHandler);
+
             QTextStream resultStream(&resultFileHandler);
 
             QString dataLine;
@@ -384,30 +383,27 @@ void MainWindow::reworkDataAndTargetFiles()
                 resultStream<<dataLine;
             }*/
 
-            /*QDomDocument targetDoc;
+            QFile targetFileHandler(targetFile);
+            QDomDocument targetDoc;
             targetDoc.setContent(&targetFileHandler);
             targetFileHandler.close();
 
             QDomElement root = targetDoc.firstChildElement();
             QDomNodeList points = root.elementsByTagName("point");
-            int numberOfOutputs = 0;
-            QString pointsToResult;
+
+            QList<int> pointsList;
             for(int i=0; i<points.count(); i++)
             {
                 QDomNode node = points.at(i);
-                QString x = node.toElement().elementsByTagName("x").at(0).toElement().text();
-                QString y = node.toElement().elementsByTagName("y").at(0).toElement().text();
-                pointsToResult.append(x + " " + y + " ");
-                qDebug()<<x<<" "<<y;
-                numberOfOutputs += 2;
+                int x = node.toElement().elementsByTagName("x").at(0).toElement().text().toInt();
+                pointsList.append(x);
+                int y = node.toElement().elementsByTagName("y").at(0).toElement().text().toInt();
+                pointsList.append(y);
             }
-            resultStream<<pointsToResult.left(pointsToResult.size() -1);
-            resultStream.flush();
 
-            dataFileHandler.close();*/
 
             OpenNN::Matrix<double>* dataMatrix = model->createMatrixFromDataFile(dataFile);
-            QList< OpenNN::Matrix<double>* > sqList = model->createSquaresFromMatrix( dataMatrix, SQUARE_A);
+            QList< OpenNN::Matrix<double>* > sqList = model->createSquaresFromMatrix( dataMatrix, SQUARE_A, pointsList);
 
 
 

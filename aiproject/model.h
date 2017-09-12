@@ -35,7 +35,7 @@ public:
     void saveMatrix(OpenNN::Matrix<double>* matrix_arg, QString path_arg);
     void decrementCurrentImageIndex();
     OpenNN::Matrix<double>* createMatrixFromDataFile(QString path);
-    QList< OpenNN::Matrix<double>* > createSquaresFromMatrix(OpenNN::Matrix<double>* matrix, int squareA);
+    QList< OpenNN::Matrix<double>* > createSquaresFromMatrix(OpenNN::Matrix<double>* matrix, int squareA, QList<int> points);
 
     class HelperOperationsWithin
     {

@@ -511,7 +511,7 @@ OpenNN::Matrix<double>* Model::createMatrixFromDataFile(QString path)
     OpenNN::Matrix<double>* matrix = new OpenNN::Matrix<double>(path.toStdString());
     return matrix;
 }
-QList< OpenNN::Matrix<double>* > Model::createSquaresFromMatrix(OpenNN::Matrix<double>* matrix, int squareA)
+QList< OpenNN::Matrix<double>* > Model::createSquaresFromMatrix(OpenNN::Matrix<double>* matrix, int squareA, QList<int> points)
 {
     QList< OpenNN::Matrix<double>* > squaresList;
 
