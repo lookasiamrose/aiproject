@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results>
+	<point>
+		<x dsc="matrix column">17</x>
+		<y dsc="matrix row">6</y>
+	</point>
+	<point>
+		<x dsc="matrix column">17</x>
+		<y dsc="matrix row">16</y>
+	</point>
+	<point>
+		<x dsc="matrix column">17</x>
+		<y dsc="matrix row">26</y>
+	</point>
+	<point>
+		<x dsc="matrix column">17</x>
+		<y dsc="matrix row">36</y>
+	</point>
+	<point>
+		<x dsc="matrix column">17</x>
+		<y dsc="matrix row">47</y>
+	</point>
+	<point>
+		<x dsc="matrix column">17</x>
+		<y dsc="matrix row">58</y>
+	</point>
+	<point>
+		<x dsc="matrix column">17</x>
+		<y dsc="matrix row">69</y>
+	</point>
+	<point>
+		<x dsc="matrix column">17</x>
+		<y dsc="matrix row">80</y>
+	</point>
+	<point>
+		<x dsc="matrix column">17</x>
+		<y dsc="matrix row">92</y>
+	</point>
+	<point>
+		<x dsc="matrix column">17</x>
+		<y dsc="matrix row">103</y>
+	</point>
+	<point>
+		<x dsc="matrix column">17</x>
+		<y dsc="matrix row">114</y>
+	</point>
+	<point>
+		<x dsc="matrix column">17</x>
+		<y dsc="matrix row">125</y>
+	</point>
+	<point>
+		<x dsc="matrix column">17</x>
+		<y dsc="matrix row">136</y>
+	</point>
+	<point>
+		<x dsc="matrix column">17</x>
+		<y dsc="matrix row">147</y>
+	</point>
+	<point>
+		<x dsc="matrix column">17</x>
+		<y dsc="matrix row">159</y>
+	</point>
+	<point>
+		<x dsc="matrix column">17</x>
+		<y dsc="matrix row">169</y>
+	</point>
+	<point>
+		<x dsc="matrix column">17</x>
+		<y dsc="matrix row">181</y>
+	</point>
+	<point>
+		<x dsc="matrix column">17</x>
+		<y dsc="matrix row">191</y>
+	</point>
+	<point>
+		<x dsc="matrix column">17</x>
+		<y dsc="matrix row">202</y>
+	</point>
+	<point>
+		<x dsc="matrix column">38</x>
+		<y dsc="matrix row">16</y>
+	</point>
+	<point>
+		<x dsc="matrix column">38</x>
+		<y dsc="matrix row">26</y>
+	</point>
+	<point>
+		<x dsc="matrix column">38</x>
+		<y dsc="matrix row">37</y>
+	</point>
+	<point>
+		<x dsc="matrix column">38</x>
+		<y dsc="matrix row">48</y>
+	</point>
+	<point>
+		<x dsc="matrix column">38</x>
+		<y dsc="matrix row">58</y>
+	</point>
+	<point>
+		<x dsc="matrix column">38</x>
+		<y dsc="matrix row">70</y>
+	</point>
+	<point>
+		<x dsc="matrix column">38</x>
+		<y dsc="matrix row">81</y>
+	</point>
+	<point>
+		<x dsc="matrix column">38</x>
+		<y dsc="matrix row">92</y>
+	</point>
+	<point>
+		<x dsc="matrix column">38</x>
+		<y dsc="matrix row">103</y>
+	</point>
+	<point>
+		<x dsc="matrix column">38</x>
+		<y dsc="matrix row">114</y>
+	</point>
+	<point>
+		<x dsc="matrix column">38</x>
+		<y dsc="matrix row">125</y>
+	</point>
+	<point>
+		<x dsc="matrix column">38</x>
+		<y dsc="matrix row">136</y>
+	</point>
+	<point>
+		<x dsc="matrix column">38</x>
+		<y dsc="matrix row">147</y>
+	</point>
+	<point>
+		<x dsc="matrix column">38</x>
+		<y dsc="matrix row">159</y>
+	</point>
+	<point>
+		<x dsc="matrix column">38</x>
+		<y dsc="matrix row">169</y>
+	</point>
+	<point>
+		<x dsc="matrix column">38</x>
+		<y dsc="matrix row">191</y>
+	</point>
+	<point>
+		<x dsc="matrix column">38</x>
+		<y dsc="matrix row">181</y>
+	</point>
+	<point>
+		<x dsc="matrix column">38</x>
+		<y dsc="matrix row">202</y>
+	</point>
+	<point>
+		<x dsc="matrix column">129</x>
+		<y dsc="matrix row">17</y>
+	</point>
+	<point>
+		<x dsc="matrix column">129</x>
+		<y dsc="matrix row">26</y>
+	</point>
+	<point>
+		<x dsc="matrix column">129</x>
+		<y dsc="matrix row">37</y>
+	</point>
+	<point>
+		<x dsc="matrix column">129</x>
+		<y dsc="matrix row">48</y>
+	</point>
+	<point>
+		<x dsc="matrix column">129</x>
+		<y dsc="matrix row">59</y>
+	</point>
+	<point>
+		<x dsc="matrix column">129</x>
+		<y dsc="matrix row">70</y>
+	</point>
+	<point>
+		<x dsc="matrix column">129</x>
+		<y dsc="matrix row">81</y>
+	</point>
+	<point>
+		<x dsc="matrix column">129</x>
+		<y dsc="matrix row">92</y>
+	</point>
+	<point>
+		<x dsc="matrix column">129</x>
+		<y dsc="matrix row">103</y>
+	</point>
+	<point>
+		<x dsc="matrix column">129</x>
+		<y dsc="matrix row">114</y>
+	</point>
+	<point>
+		<x dsc="matrix column">129</x>
+		<y dsc="matrix row">125</y>
+	</point>
+	<point>
+		<x dsc="matrix column">129</x>
+		<y dsc="matrix row">136</y>
+	</point>
+	<point>
+		<x dsc="matrix column">129</x>
+		<y dsc="matrix row">147</y>
+	</point>
+	<point>
+		<x dsc="matrix column">129</x>
+		<y dsc="matrix row">159</y>
+	</point>
+	<point>
+		<x dsc="matrix column">129</x>
+		<y dsc="matrix row">169</y>
+	</point>
+	<point>
+		<x dsc="matrix column">129</x>
+		<y dsc="matrix row">181</y>
+	</point>
+	<point>
+		<x dsc="matrix column">129</x>
+		<y dsc="matrix row">191</y>
+	</point>
+	<point>
+		<x dsc="matrix column">129</x>
+		<y dsc="matrix row">202</y>
+	</point>
+	<point>
+		<x dsc="matrix column">203</x>
+		<y dsc="matrix row">17</y>
+	</point>
+	<point>
+		<x dsc="matrix column">203</x>
+		<y dsc="matrix row">26</y>
+	</point>
+	<point>
+		<x dsc="matrix column">203</x>
+		<y dsc="matrix row">37</y>
+	</point>
+	<point>
+		<x dsc="matrix column">203</x>
+		<y dsc="matrix row">48</y>
+	</point>
+	<point>
+		<x dsc="matrix column">203</x>
+		<y dsc="matrix row">59</y>
+	</point>
+	<point>
+		<x dsc="matrix column">203</x>
+		<y dsc="matrix row">70</y>
+	</point>
+	<point>
+		<x dsc="matrix column">203</x>
+		<y dsc="matrix row">81</y>
+	</point>
+	<point>
+		<x dsc="matrix column">203</x>
+		<y dsc="matrix row">92</y>
+	</point>
+	<point>
+		<x dsc="matrix column">203</x>
+		<y dsc="matrix row">103</y>
+	</point>
+	<point>
+		<x dsc="matrix column">203</x>
+		<y dsc="matrix row">114</y>
+	</point>
+	<point>
+		<x dsc="matrix column">203</x>
+		<y dsc="matrix row">125</y>
+	</point>
+	<point>
+		<x dsc="matrix column">203</x>
+		<y dsc="matrix row">136</y>
+	</point>
+	<point>
+		<x dsc="matrix column">203</x>
+		<y dsc="matrix row">147</y>
+	</point>
+	<point>
+		<x dsc="matrix column">203</x>
+		<y dsc="matrix row">159</y>
+	</point>
+	<point>
+		<x dsc="matrix column">203</x>
+		<y dsc="matrix row">169</y>
+	</point>
+	<point>
+		<x dsc="matrix column">203</x>
+		<y dsc="matrix row">180</y>
+	</point>
+	<point>
+		<x dsc="matrix column">203</x>
+		<y dsc="matrix row">191</y>
+	</point>
+	<point>
+		<x dsc="matrix column">203</x>
+		<y dsc="matrix row">202</y>
+	</point>
+	<point>
+		<x dsc="matrix column">294</x>
+		<y dsc="matrix row">17</y>
+	</point>
+	<point>
+		<x dsc="matrix column">294</x>
+		<y dsc="matrix row">26</y>
+	</point>
+	<point>
+		<x dsc="matrix column">294</x>
+		<y dsc="matrix row">37</y>
+	</point>
+	<point>
+		<x dsc="matrix column">294</x>
+		<y dsc="matrix row">48</y>
+	</point>
+	<point>
+		<x dsc="matrix column">294</x>
+		<y dsc="matrix row">59</y>
+	</point>
+	<point>
+		<x dsc="matrix column">294</x>
+		<y dsc="matrix row">70</y>
+	</point>
+	<point>
+		<x dsc="matrix column">294</x>
+		<y dsc="matrix row">81</y>
+	</point>
+	<point>
+		<x dsc="matrix column">294</x>
+		<y dsc="matrix row">92</y>
+	</point>
+	<point>
+		<x dsc="matrix column">294</x>
+		<y dsc="matrix row">103</y>
+	</point>
+	<point>
+		<x dsc="matrix column">294</x>
+		<y dsc="matrix row">114</y>
+	</point>
+	<point>
+		<x dsc="matrix column">294</x>
+		<y dsc="matrix row">125</y>
+	</point>
+	<point>
+		<x dsc="matrix column">294</x>
+		<y dsc="matrix row">137</y>
+	</point>
+	<point>
+		<x dsc="matrix column">294</x>
+		<y dsc="matrix row">147</y>
+	</point>
+	<point>
+		<x dsc="matrix column">294</x>
+		<y dsc="matrix row">159</y>
+	</point>
+	<point>
+		<x dsc="matrix column">294</x>
+		<y dsc="matrix row">169</y>
+	</point>
+	<point>
+		<x dsc="matrix column">294</x>
+		<y dsc="matrix row">180</y>
+	</point>
+	<point>
+		<x dsc="matrix column">294</x>
+		<y dsc="matrix row">191</y>
+	</point>
+	<point>
+		<x dsc="matrix column">294</x>
+		<y dsc="matrix row">202</y>
+	</point>
+	<point>
+		<x dsc="matrix column">524</x>
+		<y dsc="matrix row">17</y>
+	</point>
+	<point>
+		<x dsc="matrix column">524</x>
+		<y dsc="matrix row">26</y>
+	</point>
+	<point>
+		<x dsc="matrix column">524</x>
+		<y dsc="matrix row">37</y>
+	</point>
+	<point>
+		<x dsc="matrix column">524</x>
+		<y dsc="matrix row">48</y>
+	</point>
+	<point>
+		<x dsc="matrix column">524</x>
+		<y dsc="matrix row">59</y>
+	</point>
+	<point>
+		<x dsc="matrix column">524</x>
+		<y dsc="matrix row">70</y>
+	</point>
+	<point>
+		<x dsc="matrix column">524</x>
+		<y dsc="matrix row">81</y>
+	</point>
+	<point>
+		<x dsc="matrix column">524</x>
+		<y dsc="matrix row">92</y>
+	</point>
+	<point>
+		<x dsc="matrix column">524</x>
+		<y dsc="matrix row">103</y>
+	</point>
+	<point>
+		<x dsc="matrix column">524</x>
+		<y dsc="matrix row">115</y>
+	</point>
+	<point>
+		<x dsc="matrix column">524</x>
+		<y dsc="matrix row">125</y>
+	</point>
+	<point>
+		<x dsc="matrix column">524</x>
+		<y dsc="matrix row">136</y>
+	</point>
+	<point>
+		<x dsc="matrix column">524</x>
+		<y dsc="matrix row">158</y>
+	</point>
+	<point>
+		<x dsc="matrix column">524</x>
+		<y dsc="matrix row">147</y>
+	</point>
+	<point>
+		<x dsc="matrix column">524</x>
+		<y dsc="matrix row">169</y>
+	</point>
+	<point>
+		<x dsc="matrix column">524</x>
+		<y dsc="matrix row">180</y>
+	</point>
+	<point>
+		<x dsc="matrix column">524</x>
+		<y dsc="matrix row">191</y>
+	</point>
+	<point>
+		<x dsc="matrix column">524</x>
+		<y dsc="matrix row">202</y>
+	</point>
+	<point>
+		<x dsc="matrix column">543</x>
+		<y dsc="matrix row">202</y>
+	</point>
+	<point>
+		<x dsc="matrix column">543</x>
+		<y dsc="matrix row">191</y>
+	</point>
+	<point>
+		<x dsc="matrix column">543</x>
+		<y dsc="matrix row">180</y>
+	</point>
+	<point>
+		<x dsc="matrix column">543</x>
+		<y dsc="matrix row">169</y>
+	</point>
+	<point>
+		<x dsc="matrix column">543</x>
+		<y dsc="matrix row">159</y>
+	</point>
+	<point>
+		<x dsc="matrix column">543</x>
+		<y dsc="matrix row">147</y>
+	</point>
+	<point>
+		<x dsc="matrix column">543</x>
+		<y dsc="matrix row">136</y>
+	</point>
+	<point>
+		<x dsc="matrix column">543</x>
+		<y dsc="matrix row">125</y>
+	</point>
+	<point>
+		<x dsc="matrix column">543</x>
+		<y dsc="matrix row">115</y>
+	</point>
+	<point>
+		<x dsc="matrix column">543</x>
+		<y dsc="matrix row">103</y>
+	</point>
+	<point>
+		<x dsc="matrix column">543</x>
+		<y dsc="matrix row">92</y>
+	</point>
+	<point>
+		<x dsc="matrix column">543</x>
+		<y dsc="matrix row">81</y>
+	</point>
+	<point>
+		<x dsc="matrix column">543</x>
+		<y dsc="matrix row">70</y>
+	</point>
+	<point>
+		<x dsc="matrix column">543</x>
+		<y dsc="matrix row">59</y>
+	</point>
+	<point>
+		<x dsc="matrix column">543</x>
+		<y dsc="matrix row">48</y>
+	</point>
+	<point>
+		<x dsc="matrix column">543</x>
+		<y dsc="matrix row">37</y>
+	</point>
+	<point>
+		<x dsc="matrix column">543</x>
+		<y dsc="matrix row">26</y>
+	</point>
+	<point>
+		<x dsc="matrix column">543</x>
+		<y dsc="matrix row">17</y>
+	</point>
+	<point>
+		<x dsc="matrix column">543</x>
+		<y dsc="matrix row">6</y>
+	</point>
+</results>
+<operations>
+		<contrast>0.33</contrast>
+		<contrast>0.33</contrast>
+		<contrast>0.33</contrast>
+		<contrast>0.33</contrast>
+		<simplify dsc="standard">0.75</simplify>
+		<simplify dsc="standard">0.75</simplify>
+</operations>

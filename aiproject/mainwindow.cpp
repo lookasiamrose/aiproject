@@ -347,70 +347,42 @@ void MainWindow::reworkDataAndTargetFiles()
                                                             tr("Open File"),
                                                             QCoreApplication::applicationDirPath()
                                                            ,"All files (*.*);; Open file (*.dat)");
-    //if(!dataFile.isEmpty())
-    //{
-        //if(!targetFile.isEmpty())
-        //{
-            /*QFile dataFileHandler(dataFile);
-            QFile targetFileHandler(targetFile);
 
-            if(!dataFileHandler.open(QIODevice::ReadOnly))
-                return;
+    QString resultFile = QCoreApplication::applicationDirPath() + "/resultReal.dat";
+    QString pointsFile = QCoreApplication::applicationDirPath() + "/resultPoints.dat";
+    QFile resultFileHandler(resultFile);
+    QFile pointsFileHandler(pointsFile);
+    if(!resultFileHandler.open(QIODevice::WriteOnly))
+                    return;
+    if(!pointsFileHandler.open(QIODevice::WriteOnly))
+                    return;
+    QTextStream resultStream(&resultFileHandler);
+    QTextStream pointsStream(&pointsFileHandler);
 
-            QString resultFile;
-            /*while(
-            (resultFile = QFileDialog::getSaveFileName(this,
-                                                        tr("Save File"),
-                                                        QCoreApplication::applicationDirPath()
-                                                       ,"Save file (*.dat)")).isEmpty())
-            {}
+    QFile targetFileHandler(targetFile);
+    QDomDocument targetDoc;
+    targetDoc.setContent(&targetFileHandler);
+    targetFileHandler.close();
 
-            QFile resultFileHandler(resultFile);*/
-            /*if(!resultFileHandler.open(QIODevice::WriteOnly))
-                return;
+    QDomElement root = targetDoc.firstChildElement();
+    QDomNodeList points = root.elementsByTagName("point");
 
-            QTextStream dataStream(&dataFileHandler);
+    QList<Cords> pointsList;
+    for(int i=0; i<points.count(); i++)
+    {
+        QDomNode node = points.at(i);
+        int x = node.toElement().elementsByTagName("x").at(0).toElement().text().toInt();
+        int y = node.toElement().elementsByTagName("y").at(0).toElement().text().toInt();
 
-            QTextStream resultStream(&resultFileHandler);
-
-            QString dataLine;
-            while(!dataStream.atEnd())
-            {
-                dataLine = dataStream.readLine();
-                dataLine.remove('\n');
-                if(dataLine.right(1) != " " && !dataStream.atEnd())
-                    dataLine.append(' ');
-                resultStream<<dataLine;
-            }*/
-
-            QFile targetFileHandler(targetFile);
-            QDomDocument targetDoc;
-            targetDoc.setContent(&targetFileHandler);
-            targetFileHandler.close();
-
-            QDomElement root = targetDoc.firstChildElement();
-            QDomNodeList points = root.elementsByTagName("point");
-
-            QList<int> pointsList;
-            for(int i=0; i<points.count(); i++)
-            {
-                QDomNode node = points.at(i);
-                int x = node.toElement().elementsByTagName("x").at(0).toElement().text().toInt();
-                pointsList.append(x);
-                int y = node.toElement().elementsByTagName("y").at(0).toElement().text().toInt();
-                pointsList.append(y);
-            }
+        Cords cordinates(x, y);
+        pointsList.append(cordinates);
+    }
 
 
-            OpenNN::Matrix<double>* dataMatrix = model->createMatrixFromDataFile(dataFile);
-            QList< OpenNN::Matrix<double>* > sqList = model->createSquaresFromMatrix( dataMatrix, SQUARE_A, pointsList);
+    OpenNN::Matrix<double>* dataMatrix = model->createMatrixFromDataFile(dataFile);
+    QList< OpenNN::Matrix<double>* > sqList = model->createSquaresFromMatrix(
+                dataMatrix, SQUARE_A, pointsList, resultStream, pointsStream);
 
-
-
-            //qDebug()<<numberOfOutputs;
-           // QMessageBox::information(this, "Output","Number of outputs - " + QString::number(numberOfOutputs));
-       // }else
-          //  QMessageBox::warning(this, "Deny!","No target file selected!");
-   // }else
-     //   QMessageBox::warning(this, "Deny!","No data file selected!");
+    resultFileHandler.close();
+    pointsFileHandler.close();
 }

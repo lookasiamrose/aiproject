@@ -2,6 +2,7 @@
 #define MODEL_H
 
 #include <QImage>
+#include <QTextStream>
 #include <QObject>
 
 #include <math.h>
@@ -11,6 +12,26 @@
 using namespace OpenNN;
 
 enum class Normalization{ NO, STANDARD, HIGHLIGHTED };
+
+class Cords : public QObject
+{
+    Q_OBJECT
+public:
+    int x;
+    int y;
+public:
+    Cords(int xArg, int yArg){
+        x = xArg;
+        y = yArg;
+    }
+    bool operator==(const Cords& crd){
+        return (x == crd.x) && (y == crd.y);
+    }
+    Cords ( const Cords & crd){
+        x = crd.x;
+        y = crd.y;
+    }
+};
 
 class Model : public QObject
 {
@@ -35,7 +56,9 @@ public:
     void saveMatrix(OpenNN::Matrix<double>* matrix_arg, QString path_arg);
     void decrementCurrentImageIndex();
     OpenNN::Matrix<double>* createMatrixFromDataFile(QString path);
-    QList< OpenNN::Matrix<double>* > createSquaresFromMatrix(OpenNN::Matrix<double>* matrix, int squareA, QList<int> points);
+    QList< OpenNN::Matrix<double>* > createSquaresFromMatrix(OpenNN::Matrix<double>* matrix, int squareA,
+                           QList<Cords> points, QTextStream& resultStream, QTextStream& localPointsStream);
+    void printMatrixToStream(OpenNN::Matrix<double>* matrix, QTextStream& stream);
 
     class HelperOperationsWithin
     {

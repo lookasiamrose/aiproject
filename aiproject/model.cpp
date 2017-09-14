@@ -4,6 +4,7 @@
 #include <QColor>
 #include <QFile>
 
+
 Model::Model(QObject *parent) : QObject(parent)
 {
     currentImageIndex = -1;
@@ -511,7 +512,8 @@ OpenNN::Matrix<double>* Model::createMatrixFromDataFile(QString path)
     OpenNN::Matrix<double>* matrix = new OpenNN::Matrix<double>(path.toStdString());
     return matrix;
 }
-QList< OpenNN::Matrix<double>* > Model::createSquaresFromMatrix(OpenNN::Matrix<double>* matrix, int squareA, QList<int> points)
+QList< OpenNN::Matrix<double>* > Model::createSquaresFromMatrix(OpenNN::Matrix<double>* matrix,
+     int squareA, QList<Cords> points, QTextStream& resultStream, QTextStream& localPointsStream)
 {
     QList< OpenNN::Matrix<double>* > squaresList;
 
@@ -521,21 +523,54 @@ QList< OpenNN::Matrix<double>* > Model::createSquaresFromMatrix(OpenNN::Matrix<d
         {
            if( (x%squareA == 0)&&(y%squareA == 0)&&(y!=0)&&(x!=0) )
            {
-               OpenNN::Matrix<double>* subMatrix = new OpenNN::Matrix<double>(20,20);
+               bool flagContains = false;
+               Cords crdToPrint(-1,-1);
+               OpenNN::Matrix<double>* subMatrix = new OpenNN::Matrix<double>(squareA,squareA);
                for(int i=0;i<squareA;i++)
                {
+
                     OpenNN::Vector<double> row;
                     for(int xX = 0; xX < squareA; xX++)
                     {
-                        double element = matrix->operator ()(y-squareA+i,x-squareA+xX);
-                        qDebug()<<" element :"<<element;
+                        int yCord = y-squareA+i;
+                        int xCord = x-squareA+xX;
+                        if(points.contains(Cords(xCord, yCord))){
+                            flagContains = true;
+                            crdToPrint.x = xX;
+                            crdToPrint.y = i;
+                        }
+                        double element = matrix->operator ()(yCord,xCord);
+
                         row = row.insert_element(xX,element);
                     }
                     subMatrix->set_row(i,row);
                }
+               printMatrixToStream(subMatrix, resultStream);
+               if(flagContains){
+                   //resultStream<<(QString::number(crdToPrint.x))<<" "<<(QString::number(crdToPrint.y));
+                   localPointsStream<<(QString::number(crdToPrint.x))<<" "<<(QString::number(crdToPrint.y));
+               }else{
+                   //resultStream<<"-1"<<" "<<"-1";
+                   localPointsStream<<"-1"<<" "<<"-1";
+               }
+               localPointsStream<<endl;
+               resultStream<<endl;
                squaresList.append(subMatrix);
            }
         }
     }
     return squaresList;
+}
+void Model::printMatrixToStream(OpenNN::Matrix<double>* matrix, QTextStream& stream)
+{
+    for(int y = 0; y < matrix->get_rows_number(); y++)
+    {
+        QString row;
+        for(int x = 0; x < matrix->get_columns_number(); x++)
+        {
+           row += QString::number( matrix->operator ()(y,x) ,'f',2) + " ";
+        }
+        if(y == (matrix->get_rows_number()-1)) row.left(row.length()-1);
+        stream<<row;
+    }
 }
