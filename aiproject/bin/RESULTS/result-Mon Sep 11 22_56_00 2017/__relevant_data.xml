@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results>
+	<point>
+		<x dsc="matrix column">99</x>
+		<y dsc="matrix row">10</y>
+	</point>
+	<point>
+		<x dsc="matrix column">99</x>
+		<y dsc="matrix row">34</y>
+	</point>
+	<point>
+		<x dsc="matrix column">3</x>
+		<y dsc="matrix row">10</y>
+	</point>
+	<point>
+		<x dsc="matrix column">3</x>
+		<y dsc="matrix row">34</y>
+	</point>
+	<point>
+		<x dsc="matrix column">3</x>
+		<y dsc="matrix row">58</y>
+	</point>
+	<point>
+		<x dsc="matrix column">99</x>
+		<y dsc="matrix row">58</y>
+	</point>
+	<point>
+		<x dsc="matrix column">99</x>
+		<y dsc="matrix row">82</y>
+	</point>
+	<point>
+		<x dsc="matrix column">3</x>
+		<y dsc="matrix row">82</y>
+	</point>
+	<point>
+		<x dsc="matrix column">3</x>
+		<y dsc="matrix row">106</y>
+	</point>
+	<point>
+		<x dsc="matrix column">99</x>
+		<y dsc="matrix row">106</y>
+	</point>
+	<point>
+		<x dsc="matrix column">191</x>
+		<y dsc="matrix row">106</y>
+	</point>
+	<point>
+		<x dsc="matrix column">287</x>
+		<y dsc="matrix row">106</y>
+	</point>
+	<point>
+		<x dsc="matrix column">287</x>
+		<y dsc="matrix row">82</y>
+	</point>
+	<point>
+		<x dsc="matrix column">191</x>
+		<y dsc="matrix row">82</y>
+	</point>
+	<point>
+		<x dsc="matrix column">191</x>
+		<y dsc="matrix row">58</y>
+	</point>
+	<point>
+		<x dsc="matrix column">287</x>
+		<y dsc="matrix row">58</y>
+	</point>
+	<point>
+		<x dsc="matrix column">287</x>
+		<y dsc="matrix row">34</y>
+	</point>
+	<point>
+		<x dsc="matrix column">191</x>
+		<y dsc="matrix row">34</y>
+	</point>
+	<point>
+		<x dsc="matrix column">287</x>
+		<y dsc="matrix row">10</y>
+	</point>
+	<point>
+		<x dsc="matrix column">191</x>
+		<y dsc="matrix row">10</y>
+	</point>
+	<point>
+		<x dsc="matrix column">347</x>
+		<y dsc="matrix row">10</y>
+	</point>
+	<point>
+		<x dsc="matrix column">347</x>
+		<y dsc="matrix row">34</y>
+	</point>
+	<point>
+		<x dsc="matrix column">347</x>
+		<y dsc="matrix row">58</y>
+	</point>
+	<point>
+		<x dsc="matrix column">347</x>
+		<y dsc="matrix row">82</y>
+	</point>
+	<point>
+		<x dsc="matrix column">347</x>
+		<y dsc="matrix row">106</y>
+	</point>
+</results>
+<operations>
+</operations>

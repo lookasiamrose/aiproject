@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results>
+	<point>
+		<x dsc="matrix column">6</x>
+		<y dsc="matrix row">3</y>
+	</point>
+	<point>
+		<x dsc="matrix column">61</x>
+		<y dsc="matrix row">3</y>
+	</point>
+	<point>
+		<x dsc="matrix column">61</x>
+		<y dsc="matrix row">32</y>
+	</point>
+	<point>
+		<x dsc="matrix column">6</x>
+		<y dsc="matrix row">32</y>
+	</point>
+	<point>
+		<x dsc="matrix column">6</x>
+		<y dsc="matrix row">61</y>
+	</point>
+	<point>
+		<x dsc="matrix column">61</x>
+		<y dsc="matrix row">61</y>
+	</point>
+	<point>
+		<x dsc="matrix column">61</x>
+		<y dsc="matrix row">90</y>
+	</point>
+	<point>
+		<x dsc="matrix column">6</x>
+		<y dsc="matrix row">90</y>
+	</point>
+	<point>
+		<x dsc="matrix column">6</x>
+		<y dsc="matrix row">119</y>
+	</point>
+	<point>
+		<x dsc="matrix column">61</x>
+		<y dsc="matrix row">119</y>
+	</point>
+	<point>
+		<x dsc="matrix column">61</x>
+		<y dsc="matrix row">148</y>
+	</point>
+	<point>
+		<x dsc="matrix column">6</x>
+		<y dsc="matrix row">148</y>
+	</point>
+	<point>
+		<x dsc="matrix column">6</x>
+		<y dsc="matrix row">177</y>
+	</point>
+	<point>
+		<x dsc="matrix column">61</x>
+		<y dsc="matrix row">177</y>
+	</point>
+	<point>
+		<x dsc="matrix column">149</x>
+		<y dsc="matrix row">177</y>
+	</point>
+	<point>
+		<x dsc="matrix column">149</x>
+		<y dsc="matrix row">148</y>
+	</point>
+	<point>
+		<x dsc="matrix column">149</x>
+		<y dsc="matrix row">119</y>
+	</point>
+	<point>
+		<x dsc="matrix column">149</x>
+		<y dsc="matrix row">90</y>
+	</point>
+	<point>
+		<x dsc="matrix column">149</x>
+		<y dsc="matrix row">61</y>
+	</point>
+	<point>
+		<x dsc="matrix column">149</x>
+		<y dsc="matrix row">32</y>
+	</point>
+	<point>
+		<x dsc="matrix column">149</x>
+		<y dsc="matrix row">3</y>
+	</point>
+	<point>
+		<x dsc="matrix column">211</x>
+		<y dsc="matrix row">3</y>
+	</point>
+	<point>
+		<x dsc="matrix column">211</x>
+		<y dsc="matrix row">32</y>
+	</point>
+	<point>
+		<x dsc="matrix column">211</x>
+		<y dsc="matrix row">61</y>
+	</point>
+	<point>
+		<x dsc="matrix column">211</x>
+		<y dsc="matrix row">90</y>
+	</point>
+	<point>
+		<x dsc="matrix column">211</x>
+		<y dsc="matrix row">119</y>
+	</point>
+	<point>
+		<x dsc="matrix column">211</x>
+		<y dsc="matrix row">148</y>
+	</point>
+	<point>
+		<x dsc="matrix column">211</x>
+		<y dsc="matrix row">177</y>
+	</point>
+	<point>
+		<x dsc="matrix column">247</x>
+		<y dsc="matrix row">177</y>
+	</point>
+	<point>
+		<x dsc="matrix column">247</x>
+		<y dsc="matrix row">148</y>
+	</point>
+	<point>
+		<x dsc="matrix column">247</x>
+		<y dsc="matrix row">119</y>
+	</point>
+	<point>
+		<x dsc="matrix column">247</x>
+		<y dsc="matrix row">90</y>
+	</point>
+	<point>
+		<x dsc="matrix column">247</x>
+		<y dsc="matrix row">61</y>
+	</point>
+	<point>
+		<x dsc="matrix column">247</x>
+		<y dsc="matrix row">32</y>
+	</point>
+	<point>
+		<x dsc="matrix column">247</x>
+		<y dsc="matrix row">3</y>
+	</point>
+	<point>
+		<x dsc="matrix column">306</x>
+		<y dsc="matrix row">3</y>
+	</point>
+	<point>
+		<x dsc="matrix column">306</x>
+		<y dsc="matrix row">32</y>
+	</point>
+	<point>
+		<x dsc="matrix column">306</x>
+		<y dsc="matrix row">61</y>
+	</point>
+	<point>
+		<x dsc="matrix column">306</x>
+		<y dsc="matrix row">90</y>
+	</point>
+	<point>
+		<x dsc="matrix column">306</x>
+		<y dsc="matrix row">119</y>
+	</point>
+	<point>
+		<x dsc="matrix column">306</x>
+		<y dsc="matrix row">148</y>
+	</point>
+	<point>
+		<x dsc="matrix column">306</x>
+		<y dsc="matrix row">177</y>
+	</point>
+</results>
+<operations>
+</operations>
