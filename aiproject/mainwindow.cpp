@@ -348,6 +348,18 @@ void MainWindow::reworkDataAndTargetFiles()
                                                             QCoreApplication::applicationDirPath()
                                                            ,"All files (*.*);; Open file (*.dat)");
 
+
+    QDir dir;
+    dir.setPath(QCoreApplication::applicationDirPath() + "/RESULTS");
+    dir.setFilter(QDir::AllDirs);
+    QStringList allList = dir.entryList();
+    foreach(QString resDir, allList)
+    {
+        if(resDir.contains("result"))
+        {
+            qDebug()<<(dir.path() + "/" + resDir);
+        }
+    }
     QString resultFile = QCoreApplication::applicationDirPath() + "/resultReal.dat";
     QString pointsFile = QCoreApplication::applicationDirPath() + "/resultPoints.dat";
     QFile resultFileHandler(resultFile);
